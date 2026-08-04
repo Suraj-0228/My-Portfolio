@@ -248,6 +248,132 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(sec => navObserver.observe(sec));
 
 
+    // --- SCROLL PROGRESS TRACKING ---
+    const progressBar = document.getElementById('scroll-progress-bar');
+    window.addEventListener('scroll', () => {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (totalHeight > 0 && progressBar) {
+            const progress = (window.scrollY / totalHeight) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+    });
+
+
+    // --- HERO CODE EDITOR TAB SWITCHER ---
+    const codeTabs = document.querySelectorAll('.code-tab');
+    const codePanels = document.querySelectorAll('.code-panel');
+
+    codeTabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const targetTab = tab.getAttribute('data-tab');
+
+            codeTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            codePanels.forEach(panel => {
+                if (panel.id === `code-content-${targetTab}`) {
+                    panel.classList.remove('hidden');
+                } else {
+                    panel.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+
+    // --- PROJECT CATEGORY FILTER TABS ---
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const filter = tab.getAttribute('data-filter');
+
+            filterTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            projectCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                if (filter === 'all' || category === filter) {
+                    card.style.display = 'grid';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
+
+
+    // --- GLASS MODAL SYSTEM ---
+    const modalButtons = document.querySelectorAll('.open-modal-btn');
+    const closeButtons = document.querySelectorAll('.close-modal-btn');
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+
+    modalButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-target');
+            const targetModal = document.getElementById(targetId);
+            if (targetModal) {
+                targetModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modal = btn.closest('.modal-backdrop');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    backdrops.forEach(backdrop => {
+        backdrop.addEventListener('click', (e) => {
+            if (e.target === backdrop) {
+                backdrop.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            backdrops.forEach(modal => modal.classList.remove('active'));
+            document.body.style.overflow = '';
+        }
+    });
+
+
+    // --- CLICK-TO-COPY EMAIL HANDLER ---
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const copyToast = document.getElementById('copy-toast');
+
+    if (copyEmailBtn && copyToast) {
+        copyEmailBtn.addEventListener('click', () => {
+            const email = 'surajmanani0228@gmail.com';
+            navigator.clipboard.writeText(email).then(() => {
+                copyToast.classList.add('show');
+                setTimeout(() => {
+                    copyToast.classList.remove('show');
+                }, 3000);
+            }).catch(err => {
+                console.error('Failed to copy email: ', err);
+            });
+        });
+    }
+
     // --- CONTACT FORM HANDLER ---
     const form = document.getElementById('portfolio-contact-form');
     const statusMsg = document.getElementById('form-status-msg');
@@ -329,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Simulate server delivery (1.4 seconds)
             setTimeout(() => {
                 // Success feedback
-                statusMsg.textContent = `Thanks, ${name}! Your email message was simulated successfully. I'll connect with you soon.`;
+                statusMsg.textContent = `Thanks, ${name}! Your message was simulated successfully. I'll connect with you soon.`;
                 statusMsg.className = 'text-center text-sm font-semibold rounded-lg py-2.5 px-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 block';
                 
                 // Form reset
@@ -341,3 +467,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
