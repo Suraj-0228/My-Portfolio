@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-cyan: #00f2fe;
+  --color-brand-blue: #4facfe;
+  --color-brand-violet: #8f00ff;
+  --color-brand-pink: #f355da;
+  --color-bg-dark: #0a0b10;
+  --color-glass: rgba(255, 255, 255, 0.025);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-dark);
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 242, 254, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 242, 254, 0.1);
+}
+
+.section-label {
+  @apply text-xs font-semibold uppercase tracking-widest text-brand-cyan;
+}
+
+.section-title {
+  @apply text-3xl sm:text-4xl font-extrabold mt-2;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 2px;
+  margin: 0.75rem auto 0;
+  background: linear-gradient(90deg, var(--color-brand-cyan), var(--color-brand-blue));
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes blob1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(8%, 12%) scale(1.15); }
+}
+
+@keyframes blob2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-12%, -8%) scale(1.2); }
+}
+
+.blob-1 { animation: blob1 25s infinite alternate ease-in-out; }
+.blob-2 { animation: blob2 30s infinite alternate ease-in-out; }
