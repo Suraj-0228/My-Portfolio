@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { HiMenu, HiX } from 'react-icons/hi'
-import { navLinks } from '../data/portfolio'
+import { FaFileAlt } from 'react-icons/fa'
+import { navLinks, personalInfo } from '../data/portfolio'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -32,11 +33,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
-        scrolled
-          ? 'bg-bg-dark/85 backdrop-blur-md border-glass-border'
-          : 'border-transparent'
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${scrolled
+        ? 'bg-bg-dark/85 backdrop-blur-md border-glass-border'
+        : 'border-transparent'
+        }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
         <a href="#home" className="font-heading text-xl font-extrabold tracking-tight group">
@@ -51,23 +51,35 @@ export default function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className={`text-sm font-medium transition-colors relative py-1 ${
-                    active === link.href.slice(1)
-                      ? 'text-white after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-brand-cyan'
-                      : 'text-slate-400 hover:text-white'
-                  }`}
+                  className={`text-sm font-medium transition-colors relative py-1 ${active === link.href.slice(1)
+                    ? 'text-white after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-brand-cyan'
+                    : 'text-slate-400 hover:text-white'
+                    }`}
                 >
                   {link.label}
                 </a>
               </li>
             ))}
           </ul>
-          <a
-            href="#contact"
-            className="text-xs font-semibold px-4 py-2 rounded-full border border-brand-cyan/30 text-brand-cyan bg-brand-cyan/10 hover:bg-brand-cyan hover:text-slate-900 transition-all"
-          >
-            Let's Talk
-          </a>
+          <div className="flex items-center gap-3">
+            {personalInfo.resumeUrl && (
+              <a
+                href={personalInfo.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold px-3.5 py-2 rounded-full border border-glass-border text-slate-300 hover:text-white hover:border-brand-cyan/40 bg-white/5 transition-all flex items-center gap-1.5"
+              >
+                <FaFileAlt size={12} className="text-brand-cyan" />
+                Resume
+              </a>
+            )}
+            <a
+              href="#contact"
+              className="text-xs font-semibold px-4 py-2 rounded-full border border-brand-cyan/30 text-brand-cyan bg-brand-cyan/10 hover:bg-brand-cyan hover:text-slate-900 transition-all"
+            >
+              Let's Talk
+            </a>
+          </div>
         </nav>
 
         <button
@@ -91,6 +103,18 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          {personalInfo.resumeUrl && (
+            <a
+              href={personalInfo.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMobile}
+              className="text-center text-sm font-semibold px-4 py-2.5 rounded-full border border-glass-border text-slate-200 bg-white/5 flex items-center justify-center gap-2"
+            >
+              <FaFileAlt size={13} className="text-brand-cyan" />
+              Download Resume
+            </a>
+          )}
           <a
             href="#contact"
             onClick={closeMobile}

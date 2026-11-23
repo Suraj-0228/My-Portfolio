@@ -8,6 +8,8 @@ export const personalInfo = {
   linkedin: 'https://www.linkedin.com/in/suraj-manani-01826339a/',
   available: true,
   availabilityText: 'Open for Internships & Projects',
+  resumeUrl: '/Suraj_Manani_Resume.pdf', // Put your resume PDF in public/resume.pdf or paste a Google Drive link
+  web3FormsKey: '', // Optional: Get free access key at https://web3forms.com to receive form submissions directly
 };
 
 export const about = {

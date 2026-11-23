@@ -6,38 +6,62 @@
 [![React Icons](https://img.shields.io/badge/React_Icons-5.5-orange?logo=react&logoColor=white)](https://react-icons.github.io/react-icons/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-A high-fidelity, responsive personal portfolio website designed for full-stack developers. Featuring a premium **dark glassmorphic design system**, fully interactive features, dynamic routing, and custom layout highlights.
+A high-fidelity, production-ready personal developer portfolio built with **React 19**, **Vite 6**, and **Tailwind CSS v4**. Styled with a dark glassmorphic design system, fluid scroll animations, interactive modals, and recruiter-focused workflows.
 
 ---
 
-## 🎨 Key Features & Design Highlights
+## 🎨 Key Features & Architecture Highlights
 
-### 💻 1. Interactive VS Code Mockup (Hero Card)
-*   **Fully Clickable File Explorer Tabs**: Switch dynamically between `Developer.jsx` (functional profile), `skills.json` (technical categories), and `interests.css` (philosophy & status).
-*   **Authentic IDE Details**: Styled with macOS window buttons, sidebar tab indicators, custom vertical line numbers, syntactical highlighting, and a status bar indicating the git branch (`main*`) and file metadata.
+### 💻 1. Dual-Mode Hero Section
+*   **Mode Switcher `[ 💻 VS Code | 👤 Profile ]`**: Allows recruiters and visitors to toggle between technical code and personal identity in real time.
+*   **Interactive VS Code Editor Mockup**:
+    *   Clickable file explorer tabs: `Developer.jsx` (React profile component), `skills.json` (categorized tech stack), and `interests.css` (engineering philosophy & work ethic).
+    *   Editor UI elements: macOS window controls, vertical line numbers (1–14), status bar with git branch (`main*`), and syntax highlighting.
+*   **Developer Identity Profile Card**:
+    *   Stylized avatar halo, role details, location chips, availability badge (`🟢 Open for Internships & Projects`), core competency tags, and quick-action buttons.
+*   **Recruiter CTAs**: Direct **"Resume / CV"** button alongside *"View Projects"* and *"Get In Touch"*.
 
-### 📊 2. Dynamic Projects Showcase
-*   **Realistic Preview Images**: Displays actual dashboard screenshots of featured projects (**Finoire**, **Quizara**, and **TechNest**) migrated to static assets.
-*   **Interactive Zoom & Overlay Hover Effects**: Zoom transition animations on hover (`scale-[1.03]`) combined with HSL border gradients and clean action overlays.
-*   **Direct External Integrations**: Supports instant link paths to GitHub repositories and live deployment environments.
+### 🧩 2. Interactive Bento Grid ("What I Do")
+*   Structured 2x2 Bento Box layout highlighting core specializations:
+    *   **Frontend Engineering** (React 19, Tailwind CSS v4, Responsive UI)
+    *   **Full-Stack & APIs** (Node.js, Express, PHP 8.x, REST APIs)
+    *   **Database Architecture** (MongoDB Atlas, MySQL, PDO Prepared Statements)
+    *   **Modern Deployment** (Vercel, Render, Git/GitHub)
+*   Equipped with category color accents, icons, and tech stack chips.
 
-### 🎓 3. Timeline-Based Academic Log
-*   **Uniform Layout**: Interactive chronological list linking **MCA**, **BCA**, and **HSC** milestones.
-*   **Icon Badges**: Centered category icons (graduation cap and trophy) adjacent to timeline years.
+### 🛠️ 3. Branded Technical Toolkit
+*   Replaced generic percentage bars with branded tech cards featuring official SimpleIcons & FontAwesome logos.
+*   Proficiency level tags (`Core Stack`, `Advanced`, `Proficient`, `Production`).
+*   Smooth intersection-observed progress indicators with glowing gradients.
+*   **Technologies & Frameworks at a Glance**: Quick-access horizontal pill bar for fast stack appraisal.
 
-### ✉️ 4. Contact Form & Connect Hub
-*   **Direct Forms**: Responsive inputs for messages, questions, and bookings.
-*   **Social Connectivity**: Direct integration for GitHub, LinkedIn, and email.
+### 📊 4. Projects Showcase & Screenshot Lightbox
+*   **Featured Projects**: Detailed showcases for **Finoire** (MERN Stack Wealth Management), **Quizara** (PHP/MySQL LMS & Quiz Assessment Platform), and **TechNest** (Gadget E-Commerce Platform).
+*   **High-Res Screenshot Lightbox**: Clicking any project preview opens a full-screen, high-resolution modal with project headers, GitHub source links, and Live Demo buttons. Dismissible via `ESC` or backdrop click.
+*   **Dual View Alternating Layout**: Responsive layout with tech tags, key feature bullet lists, and live deployment links.
+
+### 🎓 5. Dedicated Education & Achievements Layout
+*   **Academic Journey Timeline**: Connected chronological timeline for **MCA** (Postgraduate), **BCA** (Undergraduate), and **HSC** (Higher Secondary).
+*   **Honors & Recognition Showcase**: Distinct glowing amber card highlighting the **3rd Rank — "Creators Mind" Techfest** honor for the *SmartHaven* project, including competition tags and rapid prototyping notes.
+
+### ✉️ 6. Functional Contact System & Direct Delivery
+*   **Automated Email Submissions**: Configurable via **Web3Forms** (zero backend setup needed; deliveries route straight to `surajmanani028@gmail.com`).
+*   **Intelligent Mail Client Fallback**: Automatically opens the visitor's default email client prefilled with your address, subject, and body if offline or if no API key is set.
+*   **Quick Actions**: One-click copy email button with feedback tooltip.
+
+### 🌐 7. SEO & OpenGraph Social Sharing
+*   Optimized `index.html` with complete OpenGraph (`og:title`, `og:description`, `og:image`) and Twitter Card (`summary_large_image`) tags for rich visual previews when sharing on LinkedIn, WhatsApp, or Twitter.
 
 ---
 
 ## 🛠️ Technology Stack
 
-| Layer | Technologies | Description |
-| :--- | :--- | :--- |
-| **Frontend Core** | React 19, Vite 6, JavaScript (ES6+) | Modern React layout with hot module replacement (HMR) for development. |
-| **Styling** | Tailwind CSS v4, Vanilla CSS | Next-gen utility engine configured with custom HSL tokens, animations, and HSL glassmorphism classes. |
-| **Icons** | React Icons (FontAwesome) | High-contrast vector SVG icons. |
+| Layer | Technologies & Packages |
+| :--- | :--- |
+| **Frontend Framework** | [React 19](https://react.dev/), [Vite 6](https://vite.dev/), JavaScript (ES6+) |
+| **Styling & Design System** | [Tailwind CSS v4](https://tailwindcss.com/), Glassmorphism HSL Utilities, Custom Animations |
+| **Iconography** | [React Icons](https://react-icons.github.io/react-icons/) (FontAwesome 6, SimpleIcons, HeroIcons) |
+| **Asset Delivery** | Static Assets (`public/projects/`, `public/resume.pdf`) |
 
 ---
 
@@ -45,66 +69,92 @@ A high-fidelity, responsive personal portfolio website designed for full-stack d
 
 ```bash
 My Portfolio/
-├── assets/                  # Original raw design assets
 ├── public/                  # Static served assets
-│   ├── projects/            # Project preview screenshots (finoire.png, etc.)
-│   └── favicon.svg          # Browser tab icon
+│   ├── projects/            # High-resolution dashboard screenshots
+│   │   ├── finoire.png      # Finoire dashboard screenshot
+│   │   ├── quizara.png      # Quizara dashboard screenshot
+│   │   └── technest.png     # TechNest dashboard screenshot
+│   ├── favicon.svg          # Custom SVG favicon
+│   └── resume.pdf           # Downloadable Resume / CV
 │
 ├── src/
-│   ├── components/          # Reusable UI Components
-│   │   ├── About.jsx        # Bio, metrics, and summary
-│   │   ├── Background.jsx   # Ambient moving blob animation background
-│   │   ├── Contact.jsx      # Message form with validations
-│   │   ├── Education.jsx    # Unified timeline list of academic accomplishments
-│   │   ├── Footer.jsx       # Bottom layout and copy
-│   │   ├── Hero.jsx         # Intro sections and interactive VS Code IDE mockup
-│   │   ├── Navbar.jsx       # Responsive header with smooth navigation
-│   │   ├── Projects.jsx     # Card listing for works
-│   │   └── ScrollProgress.jsx# Top reading bar indicator
+│   ├── components/          # Reusable UI Section Components
+│   │   ├── About.jsx        # Bio, stats, and 4-card Services Bento Grid
+│   │   ├── Background.jsx   # Ambient moving blob animation background & grid
+│   │   ├── Contact.jsx      # Functional contact form (Web3Forms + Mailto)
+│   │   ├── Education.jsx    # 2-column Academic Timeline & Achievements card
+│   │   ├── Footer.jsx       # Bottom layout, quick links, and social connect
+│   │   ├── Hero.jsx         # Hero section with dual-mode [VS Code | Profile] card
+│   │   ├── Navbar.jsx       # Fixed header with active blur pill & Resume CTA
+│   │   ├── Projects.jsx     # Filterable project list with Lightbox Modal
+│   │   ├── ScrollProgress.jsx # Top reading progress bar
+│   │   └── Skills.jsx       # Branded technical toolkit with SimpleIcons
 │   │
 │   ├── data/
-│   │   └── portfolio.js     # Single configuration source file for content updates
+│   │   └── portfolio.js     # Single configuration source file for all content
 │   │
-│   ├── App.jsx              # Main layout and scroll IntersectionObserver
-│   ├── index.css            # Tailwind directives, theme variables, and global classes
-│   └── main.jsx             # Entrypoint bundle script
+│   ├── App.jsx              # Main layout wrapper & IntersectionObserver reveal
+│   ├── index.css            # Tailwind directives, theme variables, and glass classes
+│   └── main.jsx             # React DOM entrypoint
 │
-├── index.html               # Main HTML wrapper
-├── package.json             # Core dependency settings
-└── vite.config.js           # Vite builder parameters
+├── index.html               # HTML wrapper with SEO, fonts, & OpenGraph metadata
+├── package.json             # Core dependency settings & scripts
+├── vite.config.js           # Vite builder parameters
+└── README.md                # Project documentation
 ```
 
 ---
 
-## 🔧 Local Running & Build
+## 🔧 Local Development & Build
 
-### Step 1: Install Dependencies
-Ensure you have [Node.js](https://nodejs.org/) installed, then run:
+### 1. Install Dependencies
+Ensure [Node.js](https://nodejs.org/) (v18+ recommended) is installed:
 ```bash
 npm install
 ```
 
-### Step 2: Run Development Server
+### 2. Start Local Development Server
 ```bash
 npm run dev
 ```
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### Step 3: Build for Production
-To generate verified, static compiled production files inside the `dist` directory:
+### 3. Build for Production
+To generate optimized production assets in the `dist/` directory:
 ```bash
 npm run build
+```
+
+### 4. Preview Production Build
+```bash
+npm run preview
 ```
 
 ---
 
 ## ✍️ Customizing Content
 
-You can customize almost all text, details, skills, and projects on this website without changing the React component logic. 
+You can customize almost all text, details, skills, links, and projects by editing a single file: [`src/data/portfolio.js`](file:///c:/Users/suraj/Desktop/My%20Portfolio/src/data/portfolio.js).
 
-Simply open [`src/data/portfolio.js`](file:///c:/Users/suraj/Desktop/My%20Portfolio/src/data/portfolio.js) and update the corresponding key-value fields:
-*   **`personalInfo`**: Change your name, tagline, email, and social profile links.
-*   **`about`**: Edit your bio descriptions and metrics tags.
-*   **`skills`**: Add or remove skill percentages and items.
-*   **`projects`**: Configure your title, description, features list, icons, github paths, and live vercel/netlify links.
-*   **`education`**: Update your graduation dates, universities, and certificates.
+*   **`personalInfo`**:
+    *   `resumeUrl`: Set path to your PDF (`/resume.pdf` or Google Drive share link).
+    *   `web3FormsKey`: Add your free access key from [web3forms.com](https://web3forms.com) to receive form submissions in your inbox.
+    *   Name, tagline, email, location, GitHub, and LinkedIn links.
+*   **`about`**: Paragraphs, metrics, and experience highlights.
+*   **`skills`**: Technical categories, skill names, and proficiency values.
+*   **`projects`**: Project titles, subtitles, category (`mern` / `php`), description, feature bullets, tech badges, GitHub links, and live URLs.
+*   **`education`**: Degree timeline entries, institutions, descriptions, and competition honors (`highlight: true`).
+
+---
+
+## 🚀 Deployment to Vercel
+
+1. Push your latest code to your GitHub repository:
+   ```bash
+   git add .
+   git commit -m "Upgrade portfolio with modern layout and features"
+   git push origin main
+   ```
+2. Log in to [Vercel](https://vercel.com/) and click **"Add New Project"**.
+3. Import your portfolio repository (Vercel automatically detects the Vite preset).
+4. Click **"Deploy"**. Your site will be live on an SSL-secured `vercel.app` domain within minutes!

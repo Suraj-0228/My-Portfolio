@@ -20,16 +20,66 @@ export default function Contact() {
     return Object.keys(e).length === 0
   }
 
-  const handleSubmit = (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault()
     if (!validate()) return
 
     setSending(true)
-    setTimeout(() => {
-      setStatus({ type: 'success', text: `Thanks, ${form.name}! I'll get back to you soon.` })
-      setForm({ name: '', email: '', subject: '', message: '' })
-      setSending(false)
-    }, 1200)
+    setStatus(null)
+
+    const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
+      form.subject || 'Portfolio Inquiry',
+    )}&body=${encodeURIComponent(
+      `Hello Suraj,\n\n${form.message}\n\nBest regards,\n${form.name}\n${form.email}`,
+    )}`
+
+    // If Web3Forms Access Key is provided in portfolio.js
+    if (personalInfo.web3FormsKey && personalInfo.web3FormsKey.trim() !== '') {
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: personalInfo.web3FormsKey,
+            name: form.name,
+            email: form.email,
+            subject: `[Portfolio Inquiry] ${form.subject}`,
+            message: form.message,
+            from_name: form.name,
+          }),
+        })
+
+        const result = await response.json()
+        if (result.success) {
+          setStatus({
+            type: 'success',
+            text: `Thank you, ${form.name}! Your message has been sent directly to my inbox.`,
+          })
+          setForm({ name: '', email: '', subject: '', message: '' })
+        } else {
+          throw new Error(result.message || 'Submission error')
+        }
+      } catch (err) {
+        setStatus({
+          type: 'fallback',
+          text: `Couldn't send automatically. Click below to open your email client:`,
+          mailtoUrl,
+        })
+      } finally {
+        setSending(false)
+      }
+    } else {
+      // Direct Mailto Fallback when no API key is provided
+      setTimeout(() => {
+        window.open(mailtoUrl, '_blank')
+        setStatus({
+          type: 'success',
+          text: `Thanks, ${form.name}! Opening your email app to deliver this directly to ${personalInfo.email}.`,
+          mailtoUrl,
+        })
+        setSending(false)
+      }, 500)
+    }
   }
 
   const copyEmail = () => {
@@ -160,13 +210,22 @@ export default function Contact() {
             </button>
 
             {status && (
-              <p className={`text-sm text-center font-medium rounded-lg py-2.5 px-4 ${
-                status.type === 'success'
+              <div
+                className={`text-sm text-center font-medium rounded-xl py-3 px-4 flex flex-col items-center gap-2 ${status.type === 'success'
                   ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400'
-                  : 'bg-red-500/10 text-red-400'
-              }`}>
-                {status.text}
-              </p>
+                  : 'bg-brand-cyan/10 border border-brand-cyan/20 text-slate-200'
+                  }`}
+              >
+                <span>{status.text}</span>
+                {status.mailtoUrl && (
+                  <a
+                    href={status.mailtoUrl}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-brand-cyan text-slate-900 hover:opacity-90 transition-opacity"
+                  >
+                    <FaEnvelope size={12} /> Send via Mail App
+                  </a>
+                )}
+              </div>
             )}
           </form>
         </div>
